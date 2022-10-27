@@ -75,17 +75,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCardAppeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
             }
 
             @Override
             public void onCardDisappeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
             }
         });
         manager.setStackFrom(StackFrom.None);
-        manager.setVisibleCount(3);
+        manager.setVisibleCount(1);
         manager.setTranslationInterval(8.0f);
         manager.setScaleInterval(0.95f);
         manager.setSwipeThreshold(0.3f);
@@ -103,10 +103,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void paginate() {
         List<ItemModel> old = adapter.getItems();
-        List<ItemModel> baru = new ArrayList<>(addList());
-        CardStackCallback callback = new CardStackCallback(old, baru);
+        List<ItemModel> recent = new ArrayList<>(addList());
+        CardStackCallback callback = new CardStackCallback(old, recent);
         DiffUtil.DiffResult hasil = DiffUtil.calculateDiff(callback);
-        adapter.setItems(baru);
+        adapter.setItems(recent);
         hasil.dispatchUpdatesTo(adapter);
     }
 
@@ -118,11 +118,11 @@ public class MainActivity extends AppCompatActivity {
         items.add(new ItemModel(R.drawable.sample4, "Schweitzdawg", "00", "Palatine"));
         items.add(new ItemModel(R.drawable.sample5, "Yung Nathaniel", "00", "Palatine"));
 
-        items.add(new ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"));
+        /*items.add(new ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"));
         items.add(new ItemModel(R.drawable.sample2, "Marpuah", "20", "Malang"));
         items.add(new ItemModel(R.drawable.sample3, "Sukijah", "27", "Jonggol"));
         items.add(new ItemModel(R.drawable.sample4, "Markobar", "19", "Bandung"));
-        items.add(new ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"));
+        items.add(new ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"));*/
         return items;
     }
 }
