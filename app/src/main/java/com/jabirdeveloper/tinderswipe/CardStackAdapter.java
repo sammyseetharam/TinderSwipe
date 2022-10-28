@@ -1,72 +1,60 @@
 package com.jabirdeveloper.tinderswipe;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
 
-import java.util.List;
+public class DeckAdapter extends BaseAdapter {
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+    // on below line we have created variables
+    // for our array list and context.
+    private ArrayList<CourseModal> courseData;
+    private Context context;
 
-public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.ViewHolder> {
-
-    private List<ItemModel> items;
-
-    public CardStackAdapter(List<ItemModel> items) {
-        this.items = items;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_card, parent, false);
-        return new ViewHolder(view);
+    // on below line we have created constructor for our variables.
+    public DeckAdapter(ArrayList<CourseModal> courseData, Context context) {
+        this.courseData = courseData;
+        this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setData(items.get(position));
+    public int getCount() {
+        // in get count method we are returning the size of our array list.
+        return courseData.size();
     }
 
     @Override
-    public int getItemCount() {
-        return items.size();
+    public Object getItem(int position) {
+        // in get item method we are returning the item from our array list.
+        return courseData.get(position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView image;
-        TextView name, usia, kota;
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            image = itemView.findViewById(R.id.item_image);
-            name = itemView.findViewById(R.id.item_name);
-            usia = itemView.findViewById(R.id.item_age);
-            kota = itemView.findViewById(R.id.item_city);
+    @Override
+    public long getItemId(int position) {
+        // in get item id we are returning the position.
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // in get view method we are inflating our layout on below line.
+        View v = convertView;
+        if (v == null) {
+            // on below line we are inflating our layout.
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_rv_item, parent, false);
         }
-
-        void setData(ItemModel data) {
-            Picasso.get()
-                    .load(data.getImage())
-                    .fit()
-                    .centerCrop()
-                    .into(image);
-            name.setText(data.getName());
-            usia.setText(data.getUsia());
-            kota.setText(data.getKota());
-        }
-    }
-
-    public List<ItemModel> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemModel> items) {
-        this.items = items;
+        // on below line we are initializing our variables and setting data to our variables.
+        ((TextView) v.findViewById(R.id.idTVCourseName)).setText(courseData.get(position).getCourseName());
+        ((TextView) v.findViewById(R.id.idTVCourseDescription)).setText(courseData.get(position).getCourseDescription());
+        ((TextView) v.findViewById(R.id.idTVCourseDuration)).setText(courseData.get(position).getCourseDuration());
+        ((TextView) v.findViewById(R.id.idTVCourseTracks)).setText(courseData.get(position).getCourseTracks());
+        ((ImageView) v.findViewById(R.id.idIVCourse)).setImageResource(courseData.get(position).getImgId());
+        return v;
     }
 }

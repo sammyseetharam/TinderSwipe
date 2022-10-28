@@ -9,13 +9,13 @@
         <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/drawable/ic_arrow_downward_black_24dp.xml" value="0.308" />
         <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/drawable/ic_arrow_upward_black_24dp.xml" value="0.308" />
         <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/drawable/overlay_black.xml" value="0.308" />
-        <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/layout/item_card.xml" value="0.3625" />
         <entry key="..\:/Users/seetharam1725/Documents/GitHub/TinderSwipe/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.308" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

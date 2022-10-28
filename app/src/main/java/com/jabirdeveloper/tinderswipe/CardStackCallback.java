@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil;
 
 public class CardStackCallback extends DiffUtil.Callback {
 
-    private List<ItemModel> old, recent;
+    private List<SongTemplate> old, recent;
 
-    public CardStackCallback(List<ItemModel> old, List<ItemModel> recent) {
+    public CardStackCallback(List<SongTemplate> old, List<SongTemplate> recent) {
         this.old = old;
         this.recent = recent;
     }
@@ -25,7 +25,7 @@ public class CardStackCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return old.get(oldItemPosition).getImage() == recent.get(newItemPosition).getImage();
+        return old.get(oldItemPosition).getalbumArtImage() == recent.get(newItemPosition).getalbumArtImage();
     }
 
     @Override
