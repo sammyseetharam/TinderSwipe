@@ -9,8 +9,6 @@ public class SongTemplate {
     private String artistName;
 
     //constructor
-
-
     public SongTemplate(int albumArtImage, String songName, String artistName) {
         this.albumArtImage = albumArtImage;
         this.songName = songName;

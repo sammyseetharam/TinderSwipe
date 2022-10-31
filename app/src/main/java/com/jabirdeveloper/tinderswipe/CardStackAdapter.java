@@ -10,29 +10,29 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class DeckAdapter extends BaseAdapter {
+public class CardStackAdapter extends BaseAdapter {
 
     // on below line we have created variables
     // for our array list and context.
-    private ArrayList<CourseModal> courseData;
+    private ArrayList<SongTemplate> songData;
     private Context context;
 
     // on below line we have created constructor for our variables.
-    public DeckAdapter(ArrayList<CourseModal> courseData, Context context) {
-        this.courseData = courseData;
+    public CardStackAdapter(ArrayList<SongTemplate> songData, Context context) {
+        this.songData = songData;
         this.context = context;
     }
 
     @Override
     public int getCount() {
         // in get count method we are returning the size of our array list.
-        return courseData.size();
+        return songData.size();
     }
 
     @Override
     public Object getItem(int position) {
         // in get item method we are returning the item from our array list.
-        return courseData.get(position);
+        return songData.get(position);
     }
 
     @Override
@@ -47,14 +47,12 @@ public class DeckAdapter extends BaseAdapter {
         View v = convertView;
         if (v == null) {
             // on below line we are inflating our layout.
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_rv_item, parent, false);
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_card, parent, false);
         }
         // on below line we are initializing our variables and setting data to our variables.
-        ((TextView) v.findViewById(R.id.idTVCourseName)).setText(courseData.get(position).getCourseName());
-        ((TextView) v.findViewById(R.id.idTVCourseDescription)).setText(courseData.get(position).getCourseDescription());
-        ((TextView) v.findViewById(R.id.idTVCourseDuration)).setText(courseData.get(position).getCourseDuration());
-        ((TextView) v.findViewById(R.id.idTVCourseTracks)).setText(courseData.get(position).getCourseTracks());
-        ((ImageView) v.findViewById(R.id.idIVCourse)).setImageResource(courseData.get(position).getImgId());
+        ((TextView) v.findViewById(R.id.songName)).setText(songData.get(position).getSongName());
+        ((TextView) v.findViewById(R.id.artistName)).setText(songData.get(position).getArtistName());
+        ((ImageView) v.findViewById(R.id.songImage)).setImageResource(songData.get(position).getAlbumArtImage());
         return v;
     }
 }

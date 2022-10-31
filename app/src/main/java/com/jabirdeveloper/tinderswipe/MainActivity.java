@@ -1,128 +1,78 @@
 package com.jabirdeveloper.tinderswipe;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DiffUtil;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.LinearInterpolator;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
-import com.yuyakaido.android.cardstackview.CardStackListener;
-import com.yuyakaido.android.cardstackview.CardStackView;
-import com.yuyakaido.android.cardstackview.Direction;
-import com.yuyakaido.android.cardstackview.StackFrom;
-import com.yuyakaido.android.cardstackview.SwipeableMethod;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.daprlabs.cardstack.SwipeDeck;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "MainActivity";
-    private CardStackLayoutManager manager;
-    private CardStackAdapter adapter;
+    // on below line we are creating variable
+    // for our array list and swipe deck.
+    private SwipeDeck cardStack;
+    private ArrayList<SongTemplate> songTemplateArrayList;
+    public ArrayList<SongTemplate> wantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CardStackView cardStackView = findViewById(R.id.card_stack_view);
-        manager = new CardStackLayoutManager(this, new CardStackListener() {
+        // on below line we are initializing our array list and swipe deck.
+        songTemplateArrayList = new ArrayList<>();
+        cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
+
+        // on below line we are adding data to our array list.
+        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "Kanye West"));
+        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Champion", "Kanye West"));
+        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Flashing Lights", "Kanye West"));
+        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "Kanye West"));
+        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "Kanye West"));
+
+
+        // on below line we are creating a variable for our adapter class and passing array list to it.
+        final CardStackAdapter adapter = new CardStackAdapter(songTemplateArrayList, this);
+
+        // on below line we are setting adapter to our card stack.
+        cardStack.setAdapter(adapter);
+
+        // on below line we are setting event callback to our card stack.
+        cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
-            public void onCardDragging(Direction direction, float ratio) {
-                Log.d(TAG, "onCardDragging: d=" + direction.name() + " ratio=" + ratio);
+            public void cardSwipedLeft(int position) {
+                // on card swipe left we are displaying a toast message.
+                Toast.makeText(MainActivity.this, "Song Swiped Left", Toast.LENGTH_SHORT).show();
+                wantList.add((songTemplateArrayList.get(position)));
             }
 
             @Override
-            public void onCardSwiped(Direction direction) {
-                Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
-                if (direction == Direction.Right){
-                    Toast.makeText(MainActivity.this, "Direction Right", Toast.LENGTH_SHORT).show();
-                }
-                if (direction == Direction.Top){
-                    Toast.makeText(MainActivity.this, "Direction Top", Toast.LENGTH_SHORT).show();
-                }
-                if (direction == Direction.Left){
-                    Toast.makeText(MainActivity.this, "Direction Left", Toast.LENGTH_SHORT).show();
-                }
-                if (direction == Direction.Bottom){
-                    Toast.makeText(MainActivity.this, "Direction Bottom", Toast.LENGTH_SHORT).show();
-                }
-
-                // Paginating
-                if (manager.getTopPosition() == adapter.getItemCount() - 5){
-                    paginate();
-                }
-
+            public void cardSwipedRight(int position) {
+                // on card swiped to right we are displaying a toast message.
+                Toast.makeText(MainActivity.this, "Song Swiped Right", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onCardRewound() {
-                Log.d(TAG, "onCardRewound: " + manager.getTopPosition());
+            public void cardsDepleted() {
+                // this method is called when no card is present
+                Toast.makeText(MainActivity.this, "No more songs present", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onCardCanceled() {
-                Log.d(TAG, "onCardRewound: " + manager.getTopPosition());
+            public void cardActionDown() {
+                // this method is called when card is swiped down.
+                Log.i("TAG", "CARDS MOVED DOWN");
             }
 
             @Override
-            public void onCardAppeared(View view, int position) {
-                TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
-            }
-
-            @Override
-            public void onCardDisappeared(View view, int position) {
-                TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
+            public void cardActionUp() {
+                // this method is called when card is moved up.
+                Log.i("TAG", "CARDS MOVED UP");
             }
         });
-        manager.setStackFrom(StackFrom.None);
-        manager.setVisibleCount(1);
-        manager.setTranslationInterval(8.0f);
-        manager.setScaleInterval(0.95f);
-        manager.setSwipeThreshold(0.3f);
-        manager.setMaxDegree(20.0f);
-        manager.setDirections(Direction.FREEDOM);
-        manager.setCanScrollHorizontal(true);
-        manager.setSwipeableMethod(SwipeableMethod.Manual);
-        manager.setOverlayInterpolator(new LinearInterpolator());
-        adapter = new CardStackAdapter(addList());
-        cardStackView.setLayoutManager(manager);
-        cardStackView.setAdapter(adapter);
-        cardStackView.setItemAnimator(new DefaultItemAnimator());
-
-    }
-
-    private void paginate() {
-        List<SongTemplate> old = adapter.getItems();
-        List<SongTemplate> recent = new ArrayList<>(addList());
-        CardStackCallback callback = new CardStackCallback(old, recent);
-        DiffUtil.DiffResult hasil = DiffUtil.calculateDiff(callback);
-        adapter.setItems(recent);
-        hasil.dispatchUpdatesTo(adapter);
-    }
-
-    private List<SongTemplate> addList() {
-        List<SongTemplate> items = new ArrayList<>();
-        items.add(new SongTemplate(R.drawable.sample1, "Lil Steppa", "00", "Palatine"));
-        items.add(new SongTemplate(R.drawable.sample2, "Perm Boy", "00", "Palatine"));
-        items.add(new SongTemplate(R.drawable.sample3, "Padmuhamed", "00", "Palatine"));
-        items.add(new SongTemplate(R.drawable.sample4, "Schweitzdawg", "00", "Palatine"));
-        items.add(new SongTemplate(R.drawable.sample5, "Yung Nathaniel", "00", "Palatine"));
-
-        /*items.add(new SongTemplate(R.drawable.sample1, "Markonah", "24", "Jember"));
-        items.add(new SongTemplate(R.drawable.sample2, "Marpuah", "20", "Malang"));
-        items.add(new SongTemplate(R.drawable.sample3, "Sukijah", "27", "Jonggol"));
-        items.add(new SongTemplate(R.drawable.sample4, "Markobar", "19", "Bandung"));
-        items.add(new SongTemplate(R.drawable.sample5, "Marmut", "25", "Hutan"));*/
-        return items;
     }
 }
