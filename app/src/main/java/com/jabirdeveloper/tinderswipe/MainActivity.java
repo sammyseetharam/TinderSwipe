@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
             public void cardSwipedLeft(int position) {
                 // on card swipe left we are displaying a toast message.
                 Toast.makeText(MainActivity.this, "Song Swiped Left", Toast.LENGTH_SHORT).show();
-                wantList.add((songTemplateArrayList.get(position)));
+                SongTemplate wantSong = new SongTemplate(songTemplateArrayList.get(position).getAlbumArtImage(), songTemplateArrayList.get(position).getSongName(),
+                        songTemplateArrayList.get(position).getArtistName());
+                wantList.add(wantSong);
             }
 
             @Override
