@@ -12,11 +12,12 @@ import com.daprlabs.cardstack.SwipeDeck;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "praneet";
     // on below line we are creating variable
     // for our array list and swipe deck.
     private SwipeDeck cardStack;
-    private ArrayList<SongTemplate> songTemplateArrayList;
-    public ArrayList<SongTemplate> wantList;
+    private ArrayList<SongTemplate> songTemplateArrayList = new ArrayList<>();
+    public ArrayList<SongTemplate> wantList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +25,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // on below line we are initializing our array list and swipe deck.
-        songTemplateArrayList = new ArrayList<>();
+
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
 
         // on below line we are adding data to our array list.
-        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "Kanye West"));
-        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Champion", "Kanye West"));
-        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Flashing Lights", "Kanye West"));
-        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "Kanye West"));
-        songTemplateArrayList.add(new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "Kanye West"));
-
+        SongTemplate song1 = new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "Kanye West");
+        songTemplateArrayList.add(song1);
+        SongTemplate song2 = new SongTemplate(R.drawable.graduationalbumcover, "Champion", "Kanye West");
+        songTemplateArrayList.add(song2);
+        SongTemplate song3 = new SongTemplate(R.drawable.graduationalbumcover, "Flashing Lights", "Kanye West");
+        songTemplateArrayList.add(song3);
+        SongTemplate song4 = new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "Kanye West");
+        songTemplateArrayList.add(song4);
+        SongTemplate song5 = new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "Kanye West");
+        songTemplateArrayList.add(song5);
 
         // on below line we are creating a variable for our adapter class and passing array list to it.
         final CardStackAdapter adapter = new CardStackAdapter(songTemplateArrayList, this);
@@ -46,16 +51,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void cardSwipedLeft(int position) {
                 // on card swipe left we are displaying a toast message.
-                Toast.makeText(MainActivity.this, "Song Swiped Left", Toast.LENGTH_SHORT).show();
-                SongTemplate wantSong = new SongTemplate(songTemplateArrayList.get(position).getAlbumArtImage(), songTemplateArrayList.get(position).getSongName(),
-                        songTemplateArrayList.get(position).getArtistName());
-                wantList.add(wantSong);
+                Toast.makeText(MainActivity.this, "Song discarded", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void cardSwipedRight(int position) {
                 // on card swiped to right we are displaying a toast message.
-                Toast.makeText(MainActivity.this, "Song Swiped Right", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Song added to playlist", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "cardSwipedRight: the position is: " + position);
+                wantList.add(songTemplateArrayList.get(position));
             }
 
             @Override
