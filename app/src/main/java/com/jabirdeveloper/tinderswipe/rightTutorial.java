@@ -19,6 +19,6 @@ public class rightTutorial extends AppCompatActivity {
         imageView = findViewById(R.id.imageview);
 
         // Adding the gif here using glide library
-        Glide.with(this).load(R.drawable.swiperight).into(imageView);
+        //Glide.with(this).load(R.drawable.swiperight).into(imageView);
     }
 }
