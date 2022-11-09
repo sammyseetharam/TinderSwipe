@@ -11,10 +11,11 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"/>
-            <activity
-                android:name=".rightTutorial"
-                android:exported="true" >
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rightTutorial"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

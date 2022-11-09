@@ -19,7 +19,7 @@ public class rightTutorial extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_right_tutorial);
         imageView = findViewById(R.id.imageview);
 
         change = findViewById(R.id.begin);
