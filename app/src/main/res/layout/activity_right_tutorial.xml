@@ -76,9 +76,8 @@
 
     <Button
         android:id="@+id/begin"
-        android:layout_width="219dp"
-        android:layout_height="98dp"
-        android:layout_marginBottom="368dp"
+        android:layout_width="204dp"
+        android:layout_height="72dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/bebas_neue"
         android:gravity="center"
@@ -86,9 +85,12 @@
         android:text="BEGIN!"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
