@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="1000dp"
+    android:layout_height="600dp"
     android:layout_margin="5dp"
     android:elevation="8dp"
     app:cardCornerRadius="4dp">
@@ -25,33 +25,21 @@
         <TextView
             android:id="@+id/songName"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="141dp"
             android:padding="3dp"
             android:text="Song Name"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <!--text view for our course tracks-->
-            <TextView
-                android:id="@+id/artistName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="3dp"
-                android:text="Artist Name"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                />
-
-            <!--text view for our course duration-->
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/artistName"
+            android:layout_width="388dp"
+            android:layout_height="132dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="Artist Name"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <!--text view for our course description-->
 
