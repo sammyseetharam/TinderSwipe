@@ -34,7 +34,7 @@ public class AuthenticateActivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_authenticate);
+        //setContentView(R.layout.activity_authenticate);
 
 
         authenticateSpotify();
@@ -58,8 +58,8 @@ public class AuthenticateActivty extends AppCompatActivity {
     }
 
     private void startMainActivity() {
-        Intent newintent = new Intent(AuthenticateActivity.this, MainActivity.class);
-        startActivity(newintent);
+        //Intent newintent = new Intent(AuthenticateActivity.this, MainActivity.class);
+        //startActivity(newintent);
     }
 
 
