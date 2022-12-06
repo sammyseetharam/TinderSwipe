@@ -5,4 +5,5 @@
     <dimen name="marginFromTop">50dp</dimen>
     <dimen name="fontTitle">40dp</dimen>
     <dimen name="fontRegular">24sp</dimen>
+    <dimen name="marginFromBotton">30sp</dimen>
 </resources>
