@@ -17,8 +17,6 @@ public class GenreActivity extends AppCompatActivity {
     ImageButton rock;
 
 
-    public static final String countryID = "421Ms54es5s5iOY1H3yJUV";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +30,40 @@ public class GenreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
                 startActivity(intent1);
+                MainActivity.ifCountry = true;
+            }
+        });
+
+        pop = (ImageButton) findViewById(R.id.imageButtonPop);
+
+        pop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
+                startActivity(intent1);
+                MainActivity.ifPop = true;
+            }
+        });
+
+        hip = (ImageButton) findViewById(R.id.imageButtonRap);
+
+        hip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
+                startActivity(intent1);
+                MainActivity.ifHip = true;
+            }
+        });
+
+        rock = (ImageButton) findViewById(R.id.imageButtonRock);
+
+        rock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
+                startActivity(intent1);
+                MainActivity.ifRock = true;
             }
         });
 
