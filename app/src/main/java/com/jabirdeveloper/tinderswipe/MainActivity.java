@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<SongTemplate> songTemplateArrayList = new ArrayList<>();
     public ArrayList<SongTemplate> wantList = new ArrayList<>();
 
+    public static final String countryID = "421Ms54es5s5iOY1H3yJUV";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,16 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
 
+
         // on below line we are adding data to our array list.
-        SongTemplate song1 = new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "Kanye West");
+        SongTemplate song1 = new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "By: Kanye West");
         songTemplateArrayList.add(song1);
-        SongTemplate song2 = new SongTemplate(R.drawable.graduationalbumcover, "Champion", "Kanye West");
+        SongTemplate song2 = new SongTemplate(R.drawable.graduationalbumcover, "Champion", "By: Kanye West");
         songTemplateArrayList.add(song2);
-        SongTemplate song3 = new SongTemplate(R.drawable.graduationalbumcover, "Flashing Lights", "Kanye West");
+        SongTemplate song3 = new SongTemplate(R.drawable.graduationalbumcover, "Flashing Lights", "By: Kanye West");
         songTemplateArrayList.add(song3);
-        SongTemplate song4 = new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "Kanye West");
+        SongTemplate song4 = new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "By: Kanye West");
         songTemplateArrayList.add(song4);
-        SongTemplate song5 = new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "Kanye West");
+        SongTemplate song5 = new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "By: Kanye West");
         songTemplateArrayList.add(song5);
 
         // on below line we are creating a variable for our adapter class and passing array list to it.

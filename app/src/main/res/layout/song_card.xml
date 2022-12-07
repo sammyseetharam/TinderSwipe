@@ -7,39 +7,54 @@
     android:layout_margin="5dp"
     android:elevation="8dp"
     app:cardCornerRadius="4dp"
-    android:background="@drawable/gradient2">
+    android:background="@color/secondaryLightColor">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/secondaryLightColor">
 
         <!--image view for song image-->
         <ImageView
             android:id="@+id/songImage"
             android:layout_width="match_parent"
-            android:layout_height="323dp"
+            android:layout_height="346dp"
+            android:background="@color/secondaryLightColor"
             android:scaleType="centerCrop" />
 
         <!--text view for our song name-->
         <TextView
             android:id="@+id/songName"
             android:layout_width="match_parent"
-            android:layout_height="141dp"
+            android:layout_height="90dp"
+            android:background="@color/secondaryLightColor"
+            android:gravity="center"
             android:padding="3dp"
             android:text="Song Name"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:fontFamily="@font/bebas_neue"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="@color/white"/>
 
         <TextView
             android:id="@+id/artistName"
-            android:layout_width="388dp"
-            android:layout_height="132dp"
+            android:layout_width="match_parent"
+            android:layout_height="218dp"
             android:layout_weight="1"
+            android:background="@color/secondaryLightColor"
+            android:gravity="center"
             android:padding="3dp"
             android:text="Artist Name"
-            android:textColor="@color/black"
+            android:fontFamily="@font/bebas_neue"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <!--text view for our course description-->

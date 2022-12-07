@@ -11,26 +11,30 @@ import android.widget.ImageView;
 
 public class GenreActivity extends AppCompatActivity {
 
-    ImageView imageView1;
-    ImageButton change;
+    ImageButton country;
+    ImageButton pop;
+    ImageButton hip;
+    ImageButton rock;
+
+
+    public static final String countryID = "421Ms54es5s5iOY1H3yJUV";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.genre_screen);
-        imageView1 = findViewById(R.id.imageview);
 
-        change = findViewById(R.id.imageButtonCountry);
+        country = (ImageButton) findViewById(R.id.imageButtonCountry);
 
+        country.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
+                startActivity(intent1);
+            }
+        });
 
-
-        // Adding the gif here using glide library
-        //Glide.with(this).load(R.drawable.swiperight).into(imageView);
-    }
-
-    public void tutorialToSong (View view){
-        Intent intent1 = new Intent(this, rightTutorial.class);
-        startActivity(intent1);
     }
 
 }
