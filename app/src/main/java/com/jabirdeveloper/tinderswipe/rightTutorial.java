@@ -31,7 +31,7 @@ public class rightTutorial extends AppCompatActivity {
     }
 
     public void tutorialToSong (View view){
-        Intent intent1 = new Intent(this, MainActivity.class);
+        Intent intent1 = new Intent(this, splashScreenActivity.class);
         startActivity(intent1);
     }
 
