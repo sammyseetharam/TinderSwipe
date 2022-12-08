@@ -2,25 +2,25 @@ package com.jabirdeveloper.tinderswipe;
 
 public class SongTemplate {
     //album art
-    private int albumArtImage;
+    private String albumArtImage;
     // variables for our song name,
     // description,tracks and duration,imageId.
     private String songName;
     private String artistName;
 
     //constructor
-    public SongTemplate(int albumArtImage, String songName, String artistName) {
+    public SongTemplate(String albumArtImage, String songName, String artistName) {
         this.albumArtImage = albumArtImage;
         this.songName = songName;
         this.artistName = artistName;
     }
 
     //getters and setters
-    public int getAlbumArtImage() {
+    public String getAlbumArtImage() {
         return albumArtImage;
     }
 
-    public void setAlbumArtImage(int albumArtImage) {
+    public void setAlbumArtImage(String albumArtImage) {
         this.albumArtImage = albumArtImage;
     }
 

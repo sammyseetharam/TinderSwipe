@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 //Create song template object
                 Drawable myDrawable = getUrlDrawable("https://www.dupage88.net/site/public/agoraimages/?item=4364&v=7");
                 int resID = getResources().getIdentifier("myDrawable", "drawable", getPackageName());
-                SongTemplate newSong = new SongTemplate(resID, songName,artistName);
+                SongTemplate newSong = new SongTemplate(imageURL, songName,artistName);
                 songTemplateArrayList.add(newSong);
 
                 Log.d("Sammy",songTemplateArrayList.toString());

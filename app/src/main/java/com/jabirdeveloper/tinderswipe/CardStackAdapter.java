@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class CardStackAdapter extends BaseAdapter {
@@ -52,7 +54,8 @@ public class CardStackAdapter extends BaseAdapter {
         // on below line we are initializing our variables and setting data to our variables.
         ((TextView) v.findViewById(R.id.songName)).setText(songData.get(position).getSongName());
         ((TextView) v.findViewById(R.id.artistName)).setText(songData.get(position).getArtistName());
-        ((ImageView) v.findViewById(R.id.songImage)).setImageResource(songData.get(position).getAlbumArtImage());
+        ImageView imgV = ((ImageView) v.findViewById(R.id.songImage));
+        Picasso.get().load(songData.get(position).getAlbumArtImage()).into(imgV);
         return v;
     }
 
