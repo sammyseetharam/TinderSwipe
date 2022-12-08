@@ -41,4 +41,13 @@ public class Playlist {
     public void setTracks(Tracks tracks) {
         this.tracks = tracks;
     }
+
+    @Override
+    public String toString() {
+        return "Playlist{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", tracks=" + tracks +
+                '}';
+    }
 }

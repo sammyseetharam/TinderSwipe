@@ -23,17 +23,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "praneet";
+    private static final String TAG = "padmuhamed";
     // on below line we are creating variable
     // for our array list and swipe deck.
     private SwipeDeck cardStack;
-    private ArrayList<SongTemplate> songTemplateArrayList = new ArrayList<>();
+    public static ArrayList<SongTemplate> songTemplateArrayList = new ArrayList<>();
     public ArrayList<SongTemplate> wantList = new ArrayList<>();
-    public SongService songService;
-    Playlist mPlaylist = new Playlist();
+    public static SongService songService;
+    public static Playlist mPlaylist = new Playlist();
 
     public static final String countryID = "421Ms54es5s5iOY1H3yJUV";
     public static final String popID = "4tc0wc9XiPRVWYcqzYezzC";
@@ -45,26 +46,27 @@ public class MainActivity extends AppCompatActivity {
     public static boolean ifPop;
     public static boolean ifHip;
     public static boolean ifRock;
-    public String playlistID;
+    public static String playlistID;
 
 
-
-
-    public static Drawable drawableFromUrl(String url) throws IOException {
-        Bitmap x;
-
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.connect();
-        InputStream input = connection.getInputStream();
-
-        x = BitmapFactory.decodeStream(input);
-        return new BitmapDrawable(Resources.getSystem(), x);
+    @SuppressWarnings("deprecation")
+    public static Drawable getUrlDrawable(String url) {
+        try {/* www .  ja va 2 s. c  o m*/
+            URL aryURI = new URL(url);
+            URLConnection conn = aryURI.openConnection();
+            InputStream is = conn.getInputStream();
+            Bitmap bmp = BitmapFactory.decodeStream(is);
+            return new BitmapDrawable(bmp);
+        } catch (Exception e) {
+            return null;
+        }
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContentView(R.layout.song_card);
         // on below line we are initializing our array list and swipe deck.
 
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
@@ -88,29 +90,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         songService = new SongService(getApplicationContext());
-        songService.getmPlaylist(() ->{
-            mPlaylist = songService.getPlaylist();
-        }, playlistID);
+        songService.getmPlaylist(() ->{ mPlaylist = songService.getPlaylist(); }, playlistID);
 
-        int size = mPlaylist.getTracks().getItems().size();
+        Log.d("Sammy",mPlaylist.toString());
+
+        int size = mPlaylist.getTracks().getTotal();
         //String songName = mPlaylist.getTracks().getItems().get(0).getTrack().getName();
-
-        for(int i = 0; i < size; i++){
+        //int size = 5;
+        for(int i = 0; i < 10; i++){
             Drawable image = null;
 
-            String songName = mPlaylist.getTracks().getItems().get(i).getTrack().getName();
-            String artistName = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
-            String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
+            String songName = "sammy";
+                    //mPlaylist.getTracks().getItems().get(i).getTrack().getName();
+            String artistName = "deet";
+                    //mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
+            //String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
+
             //Create song template object
-            ImageView imageView = (ImageView) findViewById(R.id.songImage);
-            Picasso.get().load("http://example.com/image.jpg").into(imageView);
-
-            Drawable myDrawable = imageView.getDrawable();
-
-            SongTemplate newSong = new SongTemplate(myDrawable.g, songName,artistName);
+            Drawable myDrawable = getUrlDrawable("https://www.dupage88.net/site/public/agoraimages/?item=4364&v=7");
+            int resID = getResources().getIdentifier("myDrawable", "drawable", getPackageName());
+            SongTemplate newSong = new SongTemplate(resID, songName,artistName);
             songTemplateArrayList.add(newSong);
+
+            Log.d("Sammy",songTemplateArrayList.toString());
         }
 
+        /*
         // on below line we are adding data to our array list.
         SongTemplate song1 = new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "By: Kanye West");
         songTemplateArrayList.add(song1);
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         SongTemplate song4 = new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "By: Kanye West");
         songTemplateArrayList.add(song4);
         SongTemplate song5 = new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "By: Kanye West");
-        songTemplateArrayList.add(song5);
+        songTemplateArrayList.add(song5); */
 
         // on below line we are creating a variable for our adapter class and passing array list to it.
         final CardStackAdapter adapter = new CardStackAdapter(songTemplateArrayList, this);

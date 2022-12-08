@@ -39,4 +39,13 @@ public class SongTemplate {
     public void setArtistName(String artistName) {
         this.artistName = artistName;
     }
+
+    @Override
+    public String toString() {
+        return "SongTemplate{" +
+                "albumArtImage=" + albumArtImage +
+                ", songName='" + songName + '\'' +
+                ", artistName='" + artistName + '\'' +
+                '}';
+    }
 }

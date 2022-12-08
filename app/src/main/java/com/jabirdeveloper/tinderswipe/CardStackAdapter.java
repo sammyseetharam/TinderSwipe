@@ -55,4 +55,5 @@ public class CardStackAdapter extends BaseAdapter {
         ((ImageView) v.findViewById(R.id.songImage)).setImageResource(songData.get(position).getAlbumArtImage());
         return v;
     }
+
 }
