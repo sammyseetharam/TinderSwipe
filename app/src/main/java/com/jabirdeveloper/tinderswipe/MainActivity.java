@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.jabirdeveloper.tinderswipe.Connectors.SongService;
+import com.jabirdeveloper.tinderswipe.Model.Item;
 import com.jabirdeveloper.tinderswipe.Model.Playlist;
 import com.jabirdeveloper.tinderswipe.Model.Song;
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     public static boolean ifHip;
     public static boolean ifRock;
     public static String playlistID;
+
+
+    public ArrayList<Item> items = new ArrayList<>();
 
 
     @SuppressWarnings("deprecation")
@@ -90,30 +94,42 @@ public class MainActivity extends AppCompatActivity {
         }
 
         songService = new SongService(getApplicationContext());
-        songService.getmPlaylist(() ->{ mPlaylist = songService.getPlaylist(); }, playlistID);
 
-        Log.d("Sammy",mPlaylist.toString());
 
-        int size = mPlaylist.getTracks().getTotal();
+        songService.getmPlaylist(() ->{
+            mPlaylist = songService.getPlaylist();
+            Log.d("Sammy",mPlaylist.getName());
+
+            items = mPlaylist.getTracks().getItems();
+            Log.d("Sammy", items.toString());
+            for(int i = 0; i < mPlaylist.getTracks().getItems().size(); i++){
+                Drawable image = null;
+
+                //String songName = "sammy";
+                String songName = mPlaylist.getTracks().getItems().get(i).getTrack().getName();
+                //String artistName = "deet";
+                String artistName = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
+                String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
+
+                //Create song template object
+                Drawable myDrawable = getUrlDrawable("https://www.dupage88.net/site/public/agoraimages/?item=4364&v=7");
+                int resID = getResources().getIdentifier("myDrawable", "drawable", getPackageName());
+                SongTemplate newSong = new SongTemplate(resID, songName,artistName);
+                songTemplateArrayList.add(newSong);
+
+                Log.d("Sammy",songTemplateArrayList.toString());
+            }
+
+            }, playlistID);
+
+
+
+
+
+
         //String songName = mPlaylist.getTracks().getItems().get(0).getTrack().getName();
         //int size = 5;
-        for(int i = 0; i < 10; i++){
-            Drawable image = null;
 
-            String songName = "sammy";
-                    //mPlaylist.getTracks().getItems().get(i).getTrack().getName();
-            String artistName = "deet";
-                    //mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
-            //String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
-
-            //Create song template object
-            Drawable myDrawable = getUrlDrawable("https://www.dupage88.net/site/public/agoraimages/?item=4364&v=7");
-            int resID = getResources().getIdentifier("myDrawable", "drawable", getPackageName());
-            SongTemplate newSong = new SongTemplate(resID, songName,artistName);
-            songTemplateArrayList.add(newSong);
-
-            Log.d("Sammy",songTemplateArrayList.toString());
-        }
 
         /*
         // on below line we are adding data to our array list.
