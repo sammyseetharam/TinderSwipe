@@ -7,6 +7,8 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/secondaryDarkColor</item>
+        <item name="fontFamily">@font/bebas_neue</item>
+        <item name="android:fontFamily">@font/bebas_neue</item>
     </style>
 
 </resources>

@@ -39,12 +39,6 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:outlineAmbientShadowColor="@color/white"/>
-
         <TextView
             android:id="@+id/artistName"
             android:layout_width="match_parent"
