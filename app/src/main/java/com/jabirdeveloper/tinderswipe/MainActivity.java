@@ -1,6 +1,7 @@
 package com.jabirdeveloper.tinderswipe;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "padmuhamed";
@@ -33,9 +35,13 @@ public class MainActivity extends AppCompatActivity {
     // for our array list and swipe deck.
     private SwipeDeck cardStack;
     public static ArrayList<SongTemplate> songTemplateArrayList = new ArrayList<>();
-    public ArrayList<SongTemplate> wantList = new ArrayList<>();
+    public ArrayList<Integer> wantList = new ArrayList<>();
+    ArrayList<Item> wantSongs = new ArrayList<>();
     public static SongService songService;
     public static Playlist mPlaylist = new Playlist();
+
+    private Playlist mNewPlaylist;
+    Intent i;
 
     public static final String countryID = "421Ms54es5s5iOY1H3yJUV";
     public static final String popID = "4tc0wc9XiPRVWYcqzYezzC";
@@ -77,53 +83,25 @@ public class MainActivity extends AppCompatActivity {
 
         //choosing right playlist
 
-        if(ifCountry == true){
+        if(ifCountry){
             playlistID = countryID;
         }
 
-        if(ifPop == true){
+        if(ifPop){
             playlistID = popID;
         }
 
-        if(ifHip == true){
+        if(ifHip){
             playlistID = hipID;
         }
 
-        if(ifRock == true){
+        if(ifRock){
             playlistID = rockID;
         }
 
-        songService = new SongService(getApplicationContext());
 
 
-        songService.getmPlaylist(() ->{
-            mPlaylist = songService.getPlaylist();
-            Log.d("Sammy",mPlaylist.getName());
-
-            items = mPlaylist.getTracks().getItems();
-            Log.d("Sammy", items.toString());
-            for(int i = 0; i < mPlaylist.getTracks().getItems().size(); i++){
-                Drawable image = null;
-
-                //String songName = "sammy";
-                String songName = mPlaylist.getTracks().getItems().get(i).getTrack().getName();
-                //String artistName = "deet";
-                String artistName = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
-                String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
-
-                //Create song template object
-                Drawable myDrawable = getUrlDrawable("https://www.dupage88.net/site/public/agoraimages/?item=4364&v=7");
-                int resID = getResources().getIdentifier("myDrawable", "drawable", getPackageName());
-                SongTemplate newSong = new SongTemplate(imageURL, songName,artistName);
-                songTemplateArrayList.add(newSong);
-
-                Log.d("Sammy",songTemplateArrayList.toString());
-            }
-
-            }, playlistID);
-
-
-
+        startGetSwipe();
 
 
 
@@ -163,13 +141,23 @@ public class MainActivity extends AppCompatActivity {
                 // on card swiped to right we are displaying a toast message.
                 Toast.makeText(MainActivity.this, "Song added to playlist", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "cardSwipedRight: the position is: " + position);
-                wantList.add(songTemplateArrayList.get(position));
+                wantList.add(songTemplateArrayList.indexOf(songTemplateArrayList.get(position)));
             }
 
             @Override
             public void cardsDepleted() {
                 // this method is called when no card is present
                 Toast.makeText(MainActivity.this, "No more songs present", Toast.LENGTH_SHORT).show();
+                songService.getmPlaylist(()->{
+                    for(int x: wantList){
+                        wantSongs.add(mPlaylist.getTracks().getItems().get(x));
+                    }
+                    if(wantSongs.size() > 0){
+                        songService.addSongs(wantSongs);
+                    }
+                },playlistID);
+                i = new Intent(MainActivity.this,PostSwipeActivity.class);
+                startActivity(i);
             }
 
             @Override
@@ -184,5 +172,47 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("TAG", "CARDS MOVED UP");
             }
         });
+    }
+
+    public void startGetSwipe(){
+        int si = songTemplateArrayList.size()/2;
+        for (int i = 0; i < si;i++) {
+            songTemplateArrayList.remove(0);
+        }
+
+        songService = new SongService(getApplicationContext());
+
+
+        songService.getmPlaylist(() ->{
+            mPlaylist = songService.getPlaylist();
+
+
+            items = mPlaylist.getTracks().getItems();
+            for(int i = 0; i < mPlaylist.getTracks().getItems().size(); i++){
+                Drawable image = null;
+
+                //String songName = "sammy";
+                String songName = mPlaylist.getTracks().getItems().get(i).getTrack().getName();
+                //String artistName = "deet";
+                String artistName = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
+                String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
+
+                //Create song template object
+
+                SongTemplate newSong = new SongTemplate(imageURL, songName,artistName);
+                songTemplateArrayList.add(newSong);
+            }
+
+        }, playlistID);
+
+
+
+
+        songService.makePlaylist(()->{
+            mNewPlaylist = songService.getMyNewPlaylist();
+        }, "Your Spindr Playlist");
+
+
+
     }
 }

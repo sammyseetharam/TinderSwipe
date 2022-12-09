@@ -29,6 +29,6 @@ public class splashScreenActivity extends AppCompatActivity {
     };
 
     public void runTwo(){
-        handler.postDelayed(r, 3000);
+        handler.postDelayed(r, 7000);
     }
 }

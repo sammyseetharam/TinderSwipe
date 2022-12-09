@@ -29,6 +29,8 @@ public class AuthenticateActivty extends AppCompatActivity {
     private static final int REQUEST_CODE = 1337;
     private static final String SCOPES = "user-read-recently-played,user-library-modify,user-library-read,playlist-modify-public,playlist-modify-private,user-read-email,user-read-private,user-read-birthdate,playlist-read-private,playlist-read-collaborative";
 
+    public static User mainUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +47,9 @@ public class AuthenticateActivty extends AppCompatActivity {
     private void waitForUserInfo() {
         UserService userService = new UserService(queue, msharedPreferences);
         userService.get(() -> {
-            User user = userService.getUser();
+            mainUser = userService.getUser();
             editor = getSharedPreferences("SPOTIFY", 0).edit();
-            editor.putString("userid", user.userID);
+            editor.putString("userid", mainUser.id);
             Log.d("STARTING", "GOT USER INFORMATION");
             // We use commit instead of apply because we need the information stored immediately
             editor.commit();

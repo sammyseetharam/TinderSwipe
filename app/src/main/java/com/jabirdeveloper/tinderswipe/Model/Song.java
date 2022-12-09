@@ -5,13 +5,15 @@ public class Song {
     private String id;
     private String name;
     private Album album;
+    private String uri;
 
 
 
-    public Song(String id, String name, Album album) {
+    public Song(String id, String name, Album album, String uri) {
         this.name = name;
         this.id = id;
         this.album = album;
+        this.uri = uri;
     }
 
     public String getId() {
@@ -36,5 +38,13 @@ public class Song {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

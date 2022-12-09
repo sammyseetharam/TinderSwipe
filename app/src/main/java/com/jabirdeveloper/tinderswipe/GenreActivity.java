@@ -23,11 +23,18 @@ public class GenreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.genre_screen);
 
+
+
         country = (ImageButton) findViewById(R.id.imageButtonCountry);
 
         country.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.ifCountry = false;
+                MainActivity.ifHip = false;
+                MainActivity.ifPop = false;
+                MainActivity.ifRock = false;
+
                 Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
                 startActivity(intent1);
                 MainActivity.ifCountry = true;
@@ -39,6 +46,11 @@ public class GenreActivity extends AppCompatActivity {
         pop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.ifCountry = false;
+                MainActivity.ifHip = false;
+                MainActivity.ifPop = false;
+                MainActivity.ifRock = false;
+
                 Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
                 startActivity(intent1);
                 MainActivity.ifPop = true;
@@ -50,6 +62,11 @@ public class GenreActivity extends AppCompatActivity {
         hip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.ifCountry = false;
+                MainActivity.ifHip = false;
+                MainActivity.ifPop = false;
+                MainActivity.ifRock = false;
+
                 Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
                 startActivity(intent1);
                 MainActivity.ifHip = true;
@@ -61,6 +78,11 @@ public class GenreActivity extends AppCompatActivity {
         rock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.ifCountry = false;
+                MainActivity.ifHip = false;
+                MainActivity.ifPop = false;
+                MainActivity.ifRock = false;
+
                 Intent intent1 = new Intent(GenreActivity.this, rightTutorial.class);
                 startActivity(intent1);
                 MainActivity.ifRock = true;

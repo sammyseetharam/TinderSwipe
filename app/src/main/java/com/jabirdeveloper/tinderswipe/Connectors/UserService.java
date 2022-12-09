@@ -3,6 +3,7 @@ package com.jabirdeveloper.tinderswipe.Connectors;
 import android.content.SharedPreferences;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
@@ -32,7 +33,7 @@ public class UserService {
     }
 
     public void get(final VolleyCallBack callBack) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(0,ENDPOINT, null, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,ENDPOINT, null, response -> {
             Gson gson = new Gson();
             user = gson.fromJson(response.toString(), User.class);
             callBack.onSuccess();

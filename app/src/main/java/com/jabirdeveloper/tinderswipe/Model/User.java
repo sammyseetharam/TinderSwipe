@@ -10,5 +10,14 @@ public class User {
     public String country;
     public String displayName;
     public String email;
-    public String userID;
+    public String id;
+
+
+    public String getUserID() {
+        return id;
+    }
+
+    public void setUserID(String userID) {
+        this.id = userID;
+    }
 }
