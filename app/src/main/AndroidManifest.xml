@@ -11,14 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".PostSwipeActivity"
             android:exported="false" />
         <activity
             android:name=".splashScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GenreActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -27,8 +25,15 @@
             android:name=".rightTutorial"
             android:exported="true" />
         <activity
+            android:name=".GenreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_Activity"
+            android:exported="false" />
+        <activity
             android:name=".AuthenticateActivty"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
