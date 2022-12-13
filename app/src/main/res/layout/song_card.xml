@@ -17,7 +17,6 @@
         android:orientation="vertical"
         android:background="@color/secondaryLightColor">
 
-        <!--image view for song image-->
         <ImageView
             android:id="@+id/songImage"
             android:layout_width="match_parent"
@@ -25,13 +24,12 @@
             android:background="@color/secondaryLightColor"
             android:scaleType="centerCrop" />
 
-        <!--text view for our song name-->
         <TextView
             android:id="@+id/songName"
             android:layout_width="match_parent"
             android:layout_height="133dp"
             android:background="@color/secondaryLightColor"
-            android:fontFamily="@font/bebas_neue"
+            android:fontFamily="serif"
             android:gravity="center"
             android:padding="3dp"
             android:text="Song Name"
@@ -45,15 +43,12 @@
             android:layout_height="218dp"
             android:layout_weight="1"
             android:background="@color/secondaryLightColor"
+            android:fontFamily="serif"
             android:gravity="center"
             android:padding="3dp"
             android:text="Artist Name"
-            android:fontFamily="@font/bebas_neue"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
-        <!--text view for our course description-->
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

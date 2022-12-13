@@ -2,32 +2,22 @@ package com.jabirdeveloper.tinderswipe;
 
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.daprlabs.cardstack.SwipeDeck;
 import com.jabirdeveloper.tinderswipe.Connectors.SongService;
 import com.jabirdeveloper.tinderswipe.Model.Item;
 import com.jabirdeveloper.tinderswipe.Model.Playlist;
-import com.jabirdeveloper.tinderswipe.Model.Song;
-import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "padmuhamed";
@@ -54,80 +44,32 @@ public class MainActivity extends AppCompatActivity {
     public static boolean ifHip;
     public static boolean ifRock;
     public static String playlistID;
-
-
     public ArrayList<Item> items = new ArrayList<>();
-
-
-    @SuppressWarnings("deprecation")
-    public static Drawable getUrlDrawable(String url) {
-        try {/* www .  ja va 2 s. c  o m*/
-            URL aryURI = new URL(url);
-            URLConnection conn = aryURI.openConnection();
-            InputStream is = conn.getInputStream();
-            Bitmap bmp = BitmapFactory.decodeStream(is);
-            return new BitmapDrawable(bmp);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // on below line we are initializing our array list and swipe deck.
-
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
-
         //choosing right playlist
-
         if(ifCountry){
             playlistID = countryID;
         }
-
         if(ifPop){
             playlistID = popID;
         }
-
         if(ifHip){
             playlistID = hipID;
         }
-
         if(ifRock){
             playlistID = rockID;
         }
-
-
-
         startGetSwipe();
-
-
-
-        //String songName = mPlaylist.getTracks().getItems().get(0).getTrack().getName();
-        //int size = 5;
-
-
-        /*
-        // on below line we are adding data to our array list.
-        SongTemplate song1 = new SongTemplate(R.drawable.graduationalbumcover, "I Wonder", "By: Kanye West");
-        songTemplateArrayList.add(song1);
-        SongTemplate song2 = new SongTemplate(R.drawable.graduationalbumcover, "Champion", "By: Kanye West");
-        songTemplateArrayList.add(song2);
-        SongTemplate song3 = new SongTemplate(R.drawable.graduationalbumcover, "Flashing Lights", "By: Kanye West");
-        songTemplateArrayList.add(song3);
-        SongTemplate song4 = new SongTemplate(R.drawable.graduationalbumcover, "Barry Bonds", "By: Kanye West");
-        songTemplateArrayList.add(song4);
-        SongTemplate song5 = new SongTemplate(R.drawable.graduationalbumcover, "Big Brother", "By: Kanye West");
-        songTemplateArrayList.add(song5); */
-
         // on below line we are creating a variable for our adapter class and passing array list to it.
         final CardStackAdapter adapter = new CardStackAdapter(songTemplateArrayList, this);
-
         // on below line we are setting adapter to our card stack.
         cardStack.setAdapter(adapter);
-
         // on below line we are setting event callback to our card stack.
         cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
@@ -135,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 // on card swipe left we are displaying a toast message.
                 Toast.makeText(MainActivity.this, "Song discarded", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void cardSwipedRight(int position) {
                 // on card swiped to right we are displaying a toast message.
@@ -143,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "cardSwipedRight: the position is: " + position);
                 wantList.add(songTemplateArrayList.indexOf(songTemplateArrayList.get(position)));
             }
-
             @Override
             public void cardsDepleted() {
                 // this method is called when no card is present
@@ -165,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 // this method is called when card is swiped down.
                 Log.i("TAG", "CARDS MOVED DOWN");
             }
-
             @Override
             public void cardActionUp() {
                 // this method is called when card is moved up.
@@ -179,40 +118,22 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < si;i++) {
             songTemplateArrayList.remove(0);
         }
-
         songService = new SongService(getApplicationContext());
-
 
         songService.getmPlaylist(() ->{
             mPlaylist = songService.getPlaylist();
-
-
             items = mPlaylist.getTracks().getItems();
             for(int i = 0; i < mPlaylist.getTracks().getItems().size(); i++){
                 Drawable image = null;
-
-                //String songName = "sammy";
                 String songName = mPlaylist.getTracks().getItems().get(i).getTrack().getName();
-                //String artistName = "deet";
                 String artistName = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getArtists().get(0).getName();
                 String imageURL = mPlaylist.getTracks().getItems().get(i).getTrack().getAlbum().getImages().get(0).getUrl();
-
-                //Create song template object
-
-                SongTemplate newSong = new SongTemplate(imageURL, songName,artistName);
+                SongTemplate newSong = new SongTemplate(imageURL, songName,"By: "+ artistName);
                 songTemplateArrayList.add(newSong);
             }
-
         }, playlistID);
-
-
-
-
         songService.makePlaylist(()->{
             mNewPlaylist = songService.getMyNewPlaylist();
         }, "Your Spindr Playlist");
-
-
-
     }
 }
