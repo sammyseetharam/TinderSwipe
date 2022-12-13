@@ -91,4 +91,8 @@ public class GenreActivity extends AppCompatActivity {
 
     }
 
+    public void signOutClick(View view){
+        AuthenticateActivty.signOut(getApplicationContext());
+    }
+
 }

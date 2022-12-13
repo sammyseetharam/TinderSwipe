@@ -65,32 +65,26 @@
         app:srcCompat="@drawable/country"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/selectAGenre"
-        android:layout_width="280dp"
-        android:layout_height="57dp"
-        android:fontFamily="@font/bebas_neue"
-        android:gravity="center"
-        android:text="Select a Genre:"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:theme="@style/AppTheme"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonCountry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="68dp"
         android:layout_height="76dp"
-        android:layout_marginEnd="160dp"
-        app:layout_constraintBottom_toTopOf="@+id/selectAGenre"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/spinder_logo" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="16dp"
+        android:onClick="signOutClick"
+        android:text="Sign Out"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
